@@ -1,5 +1,6 @@
 .idea/
-lab 1/.idea/
-lab 3/tester.py
-lab 3/tester2.py
-lab 1/tester.py
+lab_1/.idea/
+lab_3/tester.py
+lab_3/tester2.py
+lab_1/tester.py
+/venv
