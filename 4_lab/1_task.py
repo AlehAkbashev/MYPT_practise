@@ -45,9 +45,26 @@ def eyebrows(x_face, y_face, r):
 
     x_touch_p = x_face - r / 2 + eye_rad * cos(alpha*pi/180)
     y_touch_p = y_face - 0.1 * r - eye_rad * sin(alpha*pi/180)
-    k = tan((90-alpha)*pi/180)
-    b = y_touch_p - k*x_touch_p
-    line(screen, BLACK, (x_touch_p-2*eye_rad, k*(x_touch_p-2*eye_rad)+b), (x_touch_p+1.5*eye_rad, k*(x_touch_p+1.5*eye_rad)+b))
+    k = tan((90 - alpha) * pi / 180)
+    b = y_touch_p - k * x_touch_p
+    brow_len = r
+    # x1, y1 - coordinates for the left side of left eyebrow
+    x1 = x_touch_p - brow_len * cos((90 - alpha) * pi / 180)
+    y1 = k * x1 + b
+    # x2, y2 - coordinates for the right side of left eyebrow
+    x2 = x_touch_p + 0.5 * eye_rad
+    y2 = k * x2 + b
+    k1 = tan(alpha*pi/180)
+    brow_wide = eye_rad / 2
+    y_wide = brow_wide * sin(alpha*pi/180)
+    x_wide = brow_wide * cos(alpha*pi/180)
+    polygon(screen, BLACK, (
+        (x1, y1),
+        (x2, y2),
+        (x2 + x_wide, y2 - y_wide),
+        (x1 + x_wide, y1 - y_wide)
+    )
+            )
 
     pass
 
