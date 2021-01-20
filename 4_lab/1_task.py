@@ -1,3 +1,4 @@
+from math import *
 import pygame
 from pygame.draw import *
 
@@ -23,20 +24,42 @@ def face(x_cent, y_cent, radius):
     circle(screen, BLACK, (x_cent, y_cent), radius, 3)
 
 
-def eyes(x_eye, y_eye, face_radius, eye_radius, side):
-    circle(screen, RED, (x_eye + face_radius / 2, y_eye - 0.1 * face_radius), eye_radius / 2)
-    circle(screen, BLACK, (x_eye + face_radius / 2, y_eye - 0.1 * face_radius), eye_radius / 2, 1)
-    circle(screen, BLACK, (x_eye + face_radius / 2, y_eye - 0.1 * face_radius), eye_radius / 4)
-    circle(screen, RED, (x_eye - face_radius / 2, y_eye - 0.1 * face_radius), eye_radius)
-    circle(screen, BLACK, (x_eye - face_radius / 2, y_eye - 0.1 * face_radius), eye_radius, 1)
-    circle(screen, BLACK, (x_eye - face_radius / 2, y_eye - 0.1 * face_radius), eye_radius / 2)
+def eyes(x_face, y_face, face_radius, eye_radius):
+    x_eye_left = x_face - face_radius/2
+    y_eye_left = y_face - 0.1*face_radius
+    x_eye_right = x_face + face_radius/2
+    y_eye_right = y_face - 0.1 * face_radius
+    # right eye
+    circle(screen, RED, (x_eye_right, y_eye_right), eye_radius/2)
+    circle(screen, BLACK, (x_eye_right, y_eye_right), eye_radius/2, 1)
+    circle(screen, BLACK, (x_eye_right, y_eye_right), eye_radius / 4)
+    # left eye
+    circle(screen, RED, (x_eye_left, y_eye_left), eye_radius)
+    circle(screen, BLACK, (x_eye_left, y_eye_left), eye_radius, 1)
+    circle(screen, BLACK, (x_eye_left, y_eye_left), eye_radius / 2)
+
+
+def eyebrows(x_face, y_face, r):
+    eye_rad = r * 0.2
+    alpha = 45
+
+    x_touch_p = x_face - r / 2 + eye_rad * cos(alpha*pi/180)
+    y_touch_p = y_face - 0.1 * r - eye_rad * sin(alpha*pi/180)
+    k = tan((90-alpha)*pi/180)
+    b = y_touch_p - k*x_touch_p
+    line(screen, BLACK, (x_touch_p-2*eye_rad, k*(x_touch_p-2*eye_rad)+b), (x_touch_p+1.5*eye_rad, k*(x_touch_p+1.5*eye_rad)+b))
+
+    pass
 
 
 def main():
     x_face, y_face = 300, 300
     r = 200
+    eye_rad = 0.2 * r
     face(x_face, y_face, r)
-    eyes(x_face, y_face, r, 0.2 * r)
+    eyes(x_face, y_face, r, eye_rad)
+    eyebrows(x_face, y_face, r)
+
 
 main()
 
