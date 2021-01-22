@@ -6,3 +6,4 @@ lab_1/tester.py
 /venv
 4_lab/1_example.py
 4_lab/2_example.py
+*.DS_Store
