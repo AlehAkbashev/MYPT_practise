@@ -1,3 +1,3 @@
 http://cs.mipt.ru/python
 
-Each lab is week.
+Each week one lab
