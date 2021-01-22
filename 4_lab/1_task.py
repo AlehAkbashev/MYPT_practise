@@ -5,7 +5,7 @@ from pygame.draw import *
 pygame.init()
 
 FPS = 30
-x, y = 800, 600
+x, y = 100, 90
 scr_size = (x, y)
 
 screen = pygame.display.set_mode(scr_size)
@@ -87,12 +87,15 @@ def mouth(x_face, y_face, face_radius):
     wide = face_radius * 0.2
     y1 = y_face + 2*face_radius / 3
     rect(screen, BLACK, (x1, y1-wide, x2-x1, wide))
-    
+
 
 def main():
-    x_face, y_face = 300, 300
-    r = 200
-    alpha, beta = 45, 120
+    x_face, y_face = x/2, y/2
+    if x > y:
+        r = y / 2
+    else:
+        r = x / 2
+    alpha, beta = 60, 150
     eye_rad = 0.2 * r
     face(x_face, y_face, r)
     eyes(x_face, y_face, r, eye_rad)
