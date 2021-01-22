@@ -81,8 +81,13 @@ def eyebrows(x_face, y_face, r, alpha, beta):
             )
 
 
-def mouth(x_face, y_face):
-    pass
+def mouth(x_face, y_face, face_radius):
+    x1 = x_face - face_radius / 2
+    x2 = x_face + face_radius / 2
+    wide = face_radius * 0.2
+    y1 = y_face + 2*face_radius / 3
+    rect(screen, BLACK, (x1, y1-wide, x2-x1, wide))
+    
 
 def main():
     x_face, y_face = 300, 300
@@ -92,7 +97,7 @@ def main():
     face(x_face, y_face, r)
     eyes(x_face, y_face, r, eye_rad)
     eyebrows(x_face, y_face, r, alpha, beta)
-    mouth(x_face, y_face)
+    mouth(x_face, y_face, r)
 
 
 main()
