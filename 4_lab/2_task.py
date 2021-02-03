@@ -5,9 +5,11 @@ from pygame.draw import *
 
 def main(x, y):
     sky(x, y)
-    birds()
     seagull()
     water(x, y)
+    bird(2*x/3, 0.2*y, 50, 0)
+    bird(0.1*x, 0.005*y, 50, 15)
+    bird(0.1*x, 0.3*y, 50, -15)
     fish()
     pass
 
@@ -20,7 +22,16 @@ def sky(x, y):
     rect(screen, ORANGE, [0, 0.4*y, x, 0.1*y])
 
 
-def birds():
+def bird(bird_x, bird_y, size, alpha):
+    surf_size = (3*size, 2*size)
+    surf_bird = pygame.Surface(surf_size)
+    arc(surf_bird, WHITE, [1.5*size - 1, 0.5*size - size/3, 2*size/3, 2*size/3], pi/2, pi, 3)
+    arc(surf_bird, WHITE, [1.5*size - 2*size/3 - 1, 0.5*size - size/3, 2*size, 4*size/3], atan(1 / 2), pi/2, 3)
+    arc(surf_bird, WHITE, [1.5*size - 2*size/3 + 1, 0.5*size - size/3, 2*size/3, 2*size/3], 0, pi / 2, 3)
+    arc(surf_bird, WHITE, [1.5*size - 4*size/3 + 1, 0.5*size - size/3, 2*size, 4*size/3], pi/2, pi - atan(1/2), 3)
+    surf_bird.set_colorkey('black')
+    surf_bird = pygame.transform.rotate(surf_bird, alpha)
+    screen.blit(surf_bird, (bird_x, bird_y))
     pass
 
 def seagull():
