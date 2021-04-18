@@ -5,11 +5,11 @@ from pygame.draw import *
 
 def main(x, y):
     sky(x, y)
-    seagull()
     water(x, y)
     bird(2*x/3, 0.2*y, 50, 0)
     bird(0.1*x, 0.005*y, 50, 15)
     bird(0.1*x, 0.3*y, 50, -15)
+    seagull(3*x/7, 0.75*y, 3*x/4)
     fish()
     pass
 
@@ -34,11 +34,64 @@ def bird(bird_x, bird_y, size, alpha):
     screen.blit(surf_bird, (bird_x, bird_y))
     pass
 
-def seagull():
+
+def seagull(x_c, y_c, size):
+    body_x = x_c
+    body_y = y_c
+    body_size = size / 3
+    body(body_x, body_y, body_size)
+    neck_size = body_size / 2
+    neck_x = body_x + body_size/2 + 0.15*neck_size
+    neck_y = body_y - 0.4 * neck_size/4
+    neck_n_head(neck_x, neck_y, neck_size)
+
+    leg()
+    tail()
+    wing()
+    pass
+
+
+def body(x, y, size):
+    ellipse(screen, WHITE, [x-size/2, y-size/4, size, size/2])
+    pass
+
+
+def neck_n_head(x, y, size):
+    ellipse(screen, WHITE, [x - size / 2, y - size / 4, size, size / 2])
+    head_size = size * 0.75
+    head_x = x + size / 2 + head_size / 10
+    head_y = y - size / 4
+    head_size_x = head_size
+    head_size_y = 0.65*head_size
+    head(head_x, head_y, head_size_x, head_size_y)
+    eye_size = head_size * 0.2
+    eye_x = head_x + head_size/4
+    eye_y = head_y - head_size/8
+    eye_size_x = eye_size
+    eye_size_y = 0.65*eye_size
+    eye(eye_x, eye_y, eye_size_x, eye_size_y)
+    pass
+
+
+def head(x, y, size_x, size_y):
+    ellipse(screen, WHITE, [x - size_x/2, y - size_y/2, size_x, size_y])
+
+
+def eye(x, y, size_x, size_y):
+    ellipse(screen, BLACK, [x - size_x/2, y - size_y/2, size_x, size_y])
+
+def leg():
+    pass
+
+def tail():
+    pass
+
+def wing():
     pass
 
 def water(x, y):
     rect(screen, TEAL, [0, 0.5*y, x, 0.5*y])
+
 
 def fish():
     pass
